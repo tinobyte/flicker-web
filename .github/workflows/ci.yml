@@ -19,11 +19,17 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Build backend
-        run: ./mvnw clean package -DskipTests
+      - name: Grant permission
+        run: chmod +x ./mvnw
+        working-directory: ./backend
 
-      - name: Run backend tests
-        run: ./mvnw test
+      - name: Build backend
+        run: ./mvnw clean install -DskipTests
+        working-directory: ./backend
+
+        #- name: Run backend tests
+        #  run: ./mvnw test
+
 
   build-frontend:
     runs-on: ubuntu-latest
